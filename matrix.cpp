@@ -14,7 +14,7 @@ class Matrix<T, DefaultValue, 1> {
 public:
     Matrix() = default;
 
-    int& operator[](const int idx) {
+    T& operator[](const int idx) {
         if (elements.count(idx) == 0) elements[idx] = DefaultValue;
         return elements.at(idx);
     }
@@ -29,8 +29,15 @@ public:
         return result;
     }
 
+    Matrix& operator=(const T& rhs) {
+        if(this == &rhs)
+            return *this;
+        elements = rhs.elements;
+        return *this;
+    }
+
 private:
-    std::map<int, int> elements;
+    std::map<int, T> elements;
 };
 
 template<typename T,
@@ -51,6 +58,13 @@ public:
 
     Matrix<T, DefaultValue, NumDimensionsRed>& operator[](const int idx) {
         return elements[idx];
+    }
+
+    Matrix& operator=(const T& rhs) {
+        if(this == &rhs)
+            return *this;
+        elements = rhs.elements;
+        return *this;
     }
 
 //    std::tuple<int, int, T> *begin() {
@@ -75,6 +89,7 @@ int main() {
     matrix[100][100] = 314;
     assert(matrix[100][100] == 314);
     assert(matrix.size() == 1);
+
 //    // выведется одна строка
 //    // 100100314
 //    for(auto c: matrix)
@@ -85,5 +100,8 @@ int main() {
 //        std::tie(x, y, v) = c;
 //        std::cout << x << y << v << std::endl;
 //    }
+
+//    Matrix<int, -1, 2> matrix2;
+//    matrix2 = matrix;
     return 0;
 }

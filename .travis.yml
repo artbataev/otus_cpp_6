@@ -17,7 +17,8 @@ before_script:
 script:
 - cmake .
 - cmake --build .
-- cmake --build . --target test
+- ctest -VV # run GTest
+#- cmake --build . --target test
 - cmake --build . --target package
 
 deploy:

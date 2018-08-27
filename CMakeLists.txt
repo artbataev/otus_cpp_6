@@ -7,8 +7,8 @@ else()
 endif()
 
 set(CMAKE_CXX_STANDARD 17)
-
-add_executable(matrix matrix.cpp)
+include_directories("${PROJECT_SOURCE_DIR}/include")
+add_executable(matrix src/matrix.cpp)
 
 install(TARGETS matrix RUNTIME DESTINATION bin)
 

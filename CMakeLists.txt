@@ -8,9 +8,20 @@ endif()
 
 set(CMAKE_CXX_STANDARD 17)
 include_directories("${PROJECT_SOURCE_DIR}/include")
-add_executable(matrix src/matrix.cpp)
+add_executable(matrix src/matrix_demo.cpp)
 
 install(TARGETS matrix RUNTIME DESTINATION bin)
+
+#-------------------
+# Test
+#-------------------
+enable_testing()
+add_subdirectory(test)
+
+
+#-------------------
+# Build package
+#-------------------
 
 set(CPACK_GENERATOR DEB)
 

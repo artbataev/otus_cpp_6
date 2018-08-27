@@ -126,6 +126,40 @@ private:
 };
 
 int main() {
+    Matrix<int, 0> main_matrix;
+    const int n = 10;
+    // fill main diagonal
+    for(int i = 0; i < n; i++) {
+        main_matrix[i][i] = i;
+    }
+
+    // fill counter diagonal
+    for(int i = n - 1; i >= 0; i--) {
+        main_matrix[i][n - i - 1] = i;
+    }
+    std::cout << "Matrix:" << std::endl;
+    for(int i = 1; i < n-1; i++) {
+        for(int j = 1; j < n-1; j++) {
+            if(j > 1) std::cout << " ";
+            std::cout << main_matrix[i][j];
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout << std::endl;
+    std::cout << "Matrix size: " << main_matrix.size() << std::endl;
+
+    std::cout << std::endl;
+    std::cout << "Matrix elements:" << std::endl;
+    for(auto elem: main_matrix)
+    {
+        int i, j, value;
+        std::tie(i, j, value) = elem;
+        std::cout << i << " " << j << "\t" << value << std::endl;
+    }
+
+    std::cout << std::endl << std::endl;
+    std::cout << "2d matrix tests" << std::endl;
     Matrix<int, -1> matrix; // бесконечная матрица int заполнена значениями -1
     assert(matrix.size() == 0); // все ячейки свободны
     auto a = matrix[0][0];
@@ -147,6 +181,8 @@ int main() {
     }
 
     // 3d matrix test
+    std::cout << std::endl;
+    std::cout << "3d matrix tests" << std::endl;
     Matrix<int, -1, 3> matrix3d;
     auto q = matrix3d[0][0][0];
     assert(matrix3d.size() == 0);

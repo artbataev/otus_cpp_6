@@ -46,7 +46,7 @@ public:
                 i++;
             }
         }
-        return std::make_tuple(-1, DefaultValue);
+        throw std::logic_error("no element");
     }
 
 private:
@@ -80,8 +80,8 @@ public:
         return *this;
     }
 
-    // very slow! works only for 2-d matrix
-    std::tuple<int, int, T> get_element_by_id(int elem_num) {
+    // very slow!
+    decltype(auto) get_element_by_id(int elem_num) const {
         int i = 0;
         for(const auto& [key, value]:elements) {
             size_t cur_size = value.size();
@@ -91,19 +91,18 @@ public:
                 i += cur_size;
             }
         }
-        return std::make_tuple(-1, -1, DefaultValue);
+        throw std::logic_error("no element");
     }
 
     class MatrixIterator
     {
     public:
         using value_type = Matrix;
-        using reference = std::tuple<int, int, T>;
         using pointer = Matrix* ;
         using difference_type = int;
         MatrixIterator(Matrix& parent, int elem_num_) : parent_(parent), elem_num(elem_num_) { }
         MatrixIterator operator++() { MatrixIterator i = *this; elem_num++; return i; }
-        reference operator*() { return parent_.get_element_by_id(elem_num); }
+        decltype(auto) operator*() { return parent_.get_element_by_id(elem_num); }
         bool operator==(const MatrixIterator& rhs) { return elem_num == rhs.elem_num; }
         bool operator!=(const MatrixIterator& rhs) { return elem_num != rhs.elem_num; }
     private:
@@ -147,7 +146,21 @@ int main() {
         std::cout << x << y << v << std::endl;
     }
 
-//    Matrix<int, -1, 2> matrix2;
-//    matrix2 = matrix;
+    // 3d matrix test
+    Matrix<int, -1, 3> matrix3d;
+    auto q = matrix3d[0][0][0];
+    assert(matrix3d.size() == 0);
+    matrix3d[99][99][99] = 314;
+    assert(matrix3d.size() == 1);
+
+    for(auto c: matrix3d)
+    {
+        int x;
+        int y;
+        int z;
+        int v;
+        std::tie(x, y, z, v) = c;
+        std::cout << x << y << z << v << std::endl;
+    }
     return 0;
 }

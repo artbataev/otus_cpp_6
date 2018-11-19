@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.8)
 
-if($ENV{TRAVIS_BUILD_NUMBER})
+if ($ENV{TRAVIS_BUILD_NUMBER})
     project(matrix VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
-else()
+else ()
     project(matrix VERSION 0.0.1)
-endif()
+endif ()
 
 set(CMAKE_CXX_STANDARD 17)
 include_directories("${PROJECT_SOURCE_DIR}/include")
@@ -15,9 +15,9 @@ install(TARGETS matrix RUNTIME DESTINATION bin)
 #-------------------
 # Test
 #-------------------
+
 enable_testing()
 add_subdirectory(test)
-
 
 #-------------------
 # Build package

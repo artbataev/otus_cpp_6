@@ -28,6 +28,13 @@ TEST(Test2d, TestIteration) {
     ASSERT_EQ(output, "100100314\n");
 }
 
+TEST(Test2d, TestAssignmentOperator) {
+    Matrix<int, -1> matrix;
+    ((matrix[100][100] = 314) = 0) = 217;
+    ASSERT_EQ(matrix[100][100], 217);
+    ASSERT_EQ(matrix.size(), 1);
+}
+
 TEST(Test3d, TestStatic) {
     Matrix<int, 2, 3> matrix3d;
     auto a = matrix3d[0][0][0];

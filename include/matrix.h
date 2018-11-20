@@ -1,7 +1,7 @@
 #pragma once
 
 #include <map>
-#include <iostream>
+#include <memory>
 
 template<typename T,
         int DefaultValue,

@@ -72,11 +72,7 @@ public:
     }
 
     size_t size() const {
-        size_t result = 0;
-        for (const auto&[key, value]:elements) {
-            result++;
-        }
-        return result;
+        return elements.size();
     }
 
     Matrix& operator=(const T& rhs) {

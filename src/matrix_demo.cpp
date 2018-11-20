@@ -35,6 +35,7 @@ int main() {
         std::tie(i, j, value) = elem;
         std::cout << "matrix[" << i << "][" << j << "] = " << value << std::endl;
     }
+    std::cout << "done" << std::endl;
 
     return 0;
 }
